@@ -79,6 +79,7 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM students;");
         }
+
         static function find($search_id)
         {
             $found_student = $GLOBALS['DB']->query("SELECT * FROM students WHERE id = {$search_id};");
@@ -91,6 +92,7 @@
 
             return $found_student;
         }
+
         function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM students WHERE id = {$this->getId()};");
