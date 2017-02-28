@@ -121,6 +121,7 @@
 
             $this->assertEquals($new_last_name, $result);
         }
+        
         function test_find()
         {
             $first_name = 'Foo';
@@ -136,7 +137,7 @@
                 $enrolment_date = '1234-12-12';
                 $test_student2 = new Student(null, $first_name, $last_name, $enrolment_date);
                 $test_student2->save();
-            
+
             $result = Student::find($test_student->getId());
 
             $this->assertEquals(1, 1);

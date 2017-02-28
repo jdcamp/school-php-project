@@ -124,5 +124,26 @@
 
             $this->assertEquals($new_course_name, $result);
         }
+
+        function test_find()
+        {
+            $id = 1;
+            $name = 'Foo';
+            $course_name = 'php';
+            $test_course = new Course($id, $name, $course_name);
+
+            $test_course->save();
+
+            $id2 = 1;
+            $name2 = 'Foo';
+            $course_name2 = 'php';
+            $test_course2 = new Course($id2, $name2, $course_name2);
+
+            $test_course2->save();
+
+            $result = Course::find($test_course->getId());
+
+            $this->assertEquals($test_course, $result);
+        }
     }
 ?>

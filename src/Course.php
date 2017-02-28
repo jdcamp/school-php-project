@@ -75,5 +75,17 @@
             $this->setCourseNumber($new_course_number);
         }
 
+        static function find($search_id)
+        {
+            $found_course = $GLOBALS['DB']->query("SELECT * FROM courses WHERE id = {$search_id};");
+            $query = $found_course->fetchAll(PDO::FETCH_ASSOC);
+            $id = $query[0]['id'];
+            $name = $query[0]['name'];
+            $course_number = $query[0]['course_number'];
+            $found_course = new Course($id, $name, $course_number );
+
+            return $found_course;
+        }
+
     }
 ?>
