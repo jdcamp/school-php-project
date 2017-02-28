@@ -16,12 +16,17 @@
                 <input type="date" name="enrolment_date"><br>
                 <button type="submit">Submit</button>
             </form>
-
             {% if students is not empty %}
                 <h2>Students:</h2>
                 <ul>
                     {% for student in students %}
-                        <li>{{student.getFullName}}</li>
+                        <li>{{student.getFullName}}
+                            <form action="/delete_student/{{student.getId}}" method="post">
+                                <button type="submit" class="btn btn-danger" name="button">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </form>
+                            </button>
+                        </li>
                     {% endfor %}
                 </ul>
             {% endif %}

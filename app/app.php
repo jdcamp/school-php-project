@@ -37,6 +37,11 @@ $app->post("/add_student", function() use ($app) {
     $new_student->save();
     return $app['twig']->render('students.html.twig', array('students' => Student::getAll()));
 });
+$app->post("/delete_student/{id}", function($id) use ($app) {
+    $student = Student::find($id);
+    $student->delete();
+    return $app['twig']->render('students.html.twig', array('students' => Student::getAll()));
+});
 
 
 return $app;
