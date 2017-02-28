@@ -106,6 +106,11 @@
             $GLOBALS['DB']->exec("UPDATE students SET last_name = '{$new_last_name}' WHERE id = {$this->getId()};");
             $this->setLastName($new_last_name);
         }
+        function updateEnrolmentDate($new_enrolment_date)
+        {
+            $GLOBALS['DB']->exec("UPDATE students SET enrolment_date = '{$new_enrolment_date}' WHERE id = {$this->getId()};");
+            $this->setEnrolmentDate($new_enrolment_date);
+        }
 
 }
 

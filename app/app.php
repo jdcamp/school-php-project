@@ -52,6 +52,14 @@ $app->get("/update_student/{id}", function($id) use ($app) {
     return $app['twig']->render('edit_student.html.twig', array('student' => $student));
 });
 
+$app->patch("/student_editor/{id}", function($id) use ($app) {
+    $student = Student::find($id);
+    $student->updateFirstName($_POST['first_name']);
+    $student->updateLastName($_POST['last_name']);
+    $student->updateEnrolmentDate($_POST['enrolment_date']);
+    return $app['twig']->render('students.html.twig', array('students' => Student::getAll()));
+});
+
 
 return $app;
 ?>
