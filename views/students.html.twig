@@ -9,12 +9,18 @@
             <form action="/add_student" method="post">
                 <label for="new_student">Add a student</label><br>
                 <label for="first_name">First name</label>
-                <input type="text" name="first_name"><br>
+                <input type="text" name="first_name" required><br>
                 <label for="last_name">Last name</label>
-                <input type="text" name="last_name"><br>
+                <input type="text" name="last_name" required><br>
                 <label for="enrolment_date">Enrolment date</label>
-                <input type="date" name="enrolment_date"><br>
+                <input type="date" name="enrolment_date" required><br>
                 <button type="submit">Submit</button>
+            </form>
+            <form action="/delete_all_students" method="post">
+                <input name="_method" type="hidden" value="delete">
+                <button type="submit" class="btn btn-danger" name="button">DELELTE ALL STUDENTS
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
             </form>
             {% if students is not empty %}
                 <h2>Students:</h2>
@@ -22,10 +28,16 @@
                     {% for student in students %}
                         <li>{{student.getFullName}}
                             <form action="/delete_student/{{student.getId}}" method="post">
+                                <input name="_method" type="hidden" value="delete">
                                 <button type="submit" class="btn btn-danger" name="button">
                                     <span class="glyphicon glyphicon-trash"></span>
+                                </button>
                                 </form>
-                            </button>
+                                <a href="/update_student/{{student.getId}}">
+                                    <button type="button" name="button" class="btn btn-info">Edit {{student.getFullName}}
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                </a>
                         </li>
                     {% endfor %}
                 </ul>
