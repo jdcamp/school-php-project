@@ -6,6 +6,12 @@
     </head>
     <body>
         <div class="container">
+            <h1>Students</h1>
+            <a href="/">
+                <button type="button" class="btn" name="button">
+                    <span class="glyphicon glyphicon-home"></span>
+                </button>
+            </a>
             <form action="/add_student" method="post">
                 <label for="new_student">Add a student</label><br>
                 <label for="first_name">First name</label>
@@ -32,12 +38,13 @@
                                 <button type="submit" class="btn btn-danger" name="button">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </button>
-                                </form>
-                                <a href="/update_student/{{student.getId}}">
-                                    <button type="button" name="button" class="btn btn-info">Edit {{student.getFullName}}
-                                        <span class="glyphicon glyphicon-trash"></span>
-                                    </button>
-                                </a>
+                            </form>
+                            <a href="/update_student/{{student.getId}}">
+                                <button type="button" name="button" class="btn btn-info">Edit
+                                    {{student.getFullName}}
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </a>
                         </li>
                     {% endfor %}
                 </ul>

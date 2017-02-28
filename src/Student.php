@@ -113,7 +113,33 @@
             $GLOBALS['DB']->exec("UPDATE students SET enrolment_date = '{$new_enrolment_date}' WHERE id = {$this->getId()};");
             $this->setEnrolmentDate($new_enrolment_date);
         }
+        function addCourse($course)
+        {
+            $course_id = $course->getId();
+            $student_id = $this->getId();
+            $GLOBALS['DB']->exec("INSERT INTO courses_students (course_id, student_id) VALUES ({$course_id}, {$student_id});");
+        }
 
+        function getCourse()
+        {
+            $returned_courses = $GLOBALS['DB']->query(
+                "SELECT courses.*
+                FROM students
+                JOIN courses_students ON (courses_students.student_id = students.id)
+                JOIN courses ON (courses.id = courses_students.course_id)
+                WHERE students.id = {$this->getId()};"
+            );
+
+            $courses = array();
+            foreach ($returned_courses as $course) {
+                $id = $course['id'];
+                $name = $course['name'];
+                $course_number = $course['course_number'];
+                $new_course = new Course($id, $name, $course_number);
+                array_push($courses, $new_course);
+            }
+            return $courses;
+        }
 }
 
 ?>

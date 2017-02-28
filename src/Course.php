@@ -1,4 +1,6 @@
 <?php
+    require_once "src/Student.php";
+
     class Course {
 
         private $id;
@@ -85,6 +87,34 @@
             $found_course = new Course($id, $name, $course_number );
 
             return $found_course;
+        }
+
+        function addStudent($student)
+        {
+            $student_id = $student->getId();
+            $course_id = $this->getId();
+            $GLOBALS['DB']->exec("INSERT INTO courses_students (course_id, student_id) VALUES ({$course_id}, {$student_id});");
+        }
+        function getStudents()
+        {
+            $returned_students = $GLOBALS['DB']->query(
+                "SELECT students.*
+                FROM courses
+                JOIN courses_students ON (courses_students.course_id = courses.id)
+                JOIN students ON (students.id = courses_students.student_id)
+                WHERE courses.id = {$this->getId()};"
+            );
+            // var_dump($returned_students);
+            $students = array();
+            foreach ($returned_students as $student) {
+                $id = $student['id'];
+                $first_name = $student['first_name'];
+                $last_name = $student['last_name'];
+                $enrolment_date = $student['enrolment_date'];
+                $new_student = new Student($id, $first_name, $last_name, $enrolment_date);
+                array_push($students, $new_student);
+            }
+            return $students;
         }
 
     }
