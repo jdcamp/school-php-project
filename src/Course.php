@@ -36,5 +36,27 @@
             $this->course_number = $course_number;
         }
 
+        function save() {
+            $GLOBALS['DB']->exec("INSERT INTO courses (name, course_number) VALUES ('{$this->getName()}','{$this->getCourseNumber()}');");
+            $this->id = $GLOBALS['DB']->lastInsertId();
+        }
+
+        static function getAll() {
+            $returned_courses = $GLOBALS['DB']->query("SELECT * FROM courses;");
+            $courses = array();
+            foreach ($returned_courses as $course) {
+                $id = $course['id'];
+                $name = $course['name'];
+                $course_number = $course['course_number'];
+                $new_course = new Course($id, $name, $course_number);
+                array_push($courses, $new_course);
+            }
+            return $courses;
+        }
+
+        static function deleteAll() {
+            $GLOBALS['DB']->exec("DELETE FROM courses;");
+        }
+
     }
 ?>
