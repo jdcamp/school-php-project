@@ -70,6 +70,27 @@
 
             $this->assertEquals([], $result);
         }
+        function test_delete()
+        {
+            $first_name = 'Foo';
+            $last_name = 'Bar';
+            $enrolment_date = '1234-12-12';
+            $test_student = new Student(null, $first_name, $last_name, $enrolment_date);
+
+            $test_student->save();
+
+            $first_name = 'Foo';
+            $last_name = 'Bar';
+            $enrolment_date = '1234-12-12';
+            $test_student2 = new Student(null, $first_name, $last_name, $enrolment_date);
+
+            $test_student2->save();
+            $test_student2->delete();
+
+            $result = Student::getAll();
+
+            $this->assertEquals([$test_student], $result);
+        }
 
         function test_updateFirstName()
         {
@@ -99,6 +120,25 @@
             $result = $test_student->getLastName();
 
             $this->assertEquals($new_last_name, $result);
+        }
+        function test_find()
+        {
+            $first_name = 'Foo';
+            $last_name = 'Bar';
+            $enrolment_date = '1234-12-12';
+            $test_student = new Student(null, $first_name, $last_name, $enrolment_date);
+
+            $test_student->save();
+
+            $first_name = 'Foo';
+            $last_name = 'Bar';
+            $enrolment_date = '1234-12-12';
+            $test_student2 = new Student(null, $first_name, $last_name, $enrolment_date);
+
+            $test_student2->save();
+            $result = Student::find($test_student2->getId());
+
+            $this->assertEquals($test_student2, $result);
         }
 
     }

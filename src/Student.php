@@ -79,6 +79,22 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM students;");
         }
+        static function find($search_id)
+        {
+            $found_student = $GLOBALS['DB']->query("SELECT * FROM students WHERE id = {$search_id};");
+            $query = $found_student->fetchAll(PDO::FETCH_ASSOC);
+            $id = $query[0]['id'];
+            $first_name = $query[0]['first_name'];
+            $last_name = $query[0]['last_name'];
+            $enrolment_date = $query[0]['enrolment_date'];
+            $found_student = new Student($id, $first_name, $last_name, $enrolment_date);
+
+            return $found_student;
+        }
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM students WHERE id = {$this->getId()};");
+        }
 
         function updateFirstName($new_first_name)
         {
