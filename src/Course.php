@@ -58,5 +58,10 @@
             $GLOBALS['DB']->exec("DELETE FROM courses;");
         }
 
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM courses WHERE id = {$this->getId()};");
+        }
+
     }
 ?>
