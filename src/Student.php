@@ -51,7 +51,7 @@
     	}
     	function getFullName()
         {
-    		return (($this->getFirst_name()) . ($this->getLast_name()));
+    		return (($this->getFirstName()) . " " . ($this->getLastName()));
     	}
 
         function save()

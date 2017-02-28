@@ -29,6 +29,15 @@ $app->get("/students", function() use ($app) {
     return $app['twig']->render('students.html.twig', array('students' => Student::getAll()));
 });
 
+$app->post("/add_student", function() use ($app) {
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $enrolment_date = $_POST['enrolment_date'];
+    $new_student = new Student(null, $first_name, $last_name, $enrolment_date);
+    $new_student->save();
+    return $app['twig']->render('students.html.twig', array('students' => Student::getAll()));
+});
+
 
 return $app;
 ?>
