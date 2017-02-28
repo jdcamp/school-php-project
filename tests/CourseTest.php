@@ -92,5 +92,37 @@
 
             $this->assertEquals([$test_course], $result);
         }
+
+        function test_updateName()
+        {
+            $id = 1;
+            $name = 'Foo';
+            $course_name = 'php';
+            $test_course = new Course($id, $name, $course_name);
+
+            $test_course->save();
+
+            $new_name = 'Boo';
+            $test_course->updateName($new_name);
+            $result = $test_course->getName();
+
+            $this->assertEquals($new_name, $result);
+        }
+
+        function test_updateCourseNumber()
+        {
+            $id = 1;
+            $name = 'Foo';
+            $course_name = 'php';
+            $test_course = new Course($id, $name, $course_name);
+
+            $test_course->save();
+
+            $new_course_name = 'Boo';
+            $test_course->updateCourseNumber($new_course_name);
+            $result = $test_course->getCourseNumber();
+
+            $this->assertEquals($new_course_name, $result);
+        }
     }
 ?>
