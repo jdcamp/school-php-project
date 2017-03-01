@@ -1,5 +1,5 @@
 <?php
-    require_once "src/Student.php";
+    require_once "../src/Student.php";
 
     class Course {
 
@@ -106,6 +106,9 @@
             );
             // var_dump($returned_students);
             $students = array();
+            if ($returned_students == null) {
+                return null;
+            }
             foreach ($returned_students as $student) {
                 $id = $student['id'];
                 $first_name = $student['first_name'];

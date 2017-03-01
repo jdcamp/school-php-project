@@ -35,7 +35,7 @@ $app->get("/update_student/{id}", function($id) use ($app) {
 });
 $app->get("/update_course/{id}", function($id) use ($app) {
     $course = Course::find($id);
-    return $app['twig']->render('edit_course.html.twig', array('course' => $course));
+    return $app['twig']->render('edit_course.html.twig', array('course' => $course, 'students_in_class' => $course->getStudents(), 'all_students' => Student::getAll()));
 });
 $app->get("/courses", function() use ($app) {
     return $app['twig']->render('courses.html.twig', array('courses' => Course::getAll()));
@@ -87,6 +87,14 @@ $app->patch("/course_editor/{id}", function($id) use ($app) {
     return $app['twig']->render('courses.html.twig', array('courses' => Course::getAll()));
 });
 
+$app->post("/add_student_to_course/{id}", function($id) use ($app) {
+    $course = Course::find($id);
+    $student_id = $_POST['students'];
+    $student = Student::find($student_id);
+    $course->addStudent($student);
+
+    return $app['twig']->render('edit_course.html.twig', array('course' => $course, 'students_in_class' => $course->getStudents(), 'all_students' => Student::getAll()));
+});
 
 
 return $app;
